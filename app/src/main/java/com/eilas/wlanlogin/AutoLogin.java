@@ -1,15 +1,10 @@
 package com.eilas.wlanlogin;
 
-import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.HashMap;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -37,17 +32,18 @@ public class AutoLogin {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                HashMap<?, ?> infoHashMap = MainActivity.getInfoHashMap();
                 Request request = new Request
                         .Builder()
                         .post(new FormBody
                                 .Builder()
-                                .add("DDDDD","")//w + 学号 + @njxy
-                                .add("upass","")//pwd
-                                .add("R!","0")
-                                .add("R3","0")
-                                .add("R6","0")
-                                .add("para","00")
-                                .add("0MKKey","123456")
+                                .add("DDDDD", infoHashMap.get("account").toString() + "@njxy")//w + 学号 + @njxy
+                                .add("upass", infoHashMap.get("pwd").toString())//pwd
+                                .add("R1", "0")
+                                .add("R3", "0")
+                                .add("R6", "0")
+                                .add("para", "00")
+                                .add("0MKKey", "123456")
                                 .build()
                         )
                         .url("http://10.11.2.3/a70.htm")
@@ -55,7 +51,7 @@ public class AutoLogin {
                 Log.i("aaaa", "build has finished");
                 try {
                     Response response = httpClient.newCall(request).execute();
-                    show(response.body().string());
+//                    show(response.body().string());
 
                 } catch (IOException e) {
                     e.printStackTrace();
