@@ -33,21 +33,7 @@ public class AutoLogin {
             @Override
             public void run() {
                 HashMap<?, ?> infoHashMap = MainActivity.getInfoHashMap();
-                Request request = new Request
-                        .Builder()
-                        .post(new FormBody
-                                .Builder()
-                                .add("DDDDD", infoHashMap.get("account").toString() + "@njxy")//w + 学号 + @njxy
-                                .add("upass", infoHashMap.get("pwd").toString())//pwd
-                                .add("R1", "0")
-                                .add("R3", "0")
-                                .add("R6", "0")
-                                .add("para", "00")
-                                .add("0MKKey", "123456")
-                                .build()
-                        )
-                        .url("http://10.11.2.3/a70.htm")
-                        .build();
+                Request request = new SwitchServer().constructRequest();
                 Log.i("aaaa", "build has finished");
                 try {
                     Response response = httpClient.newCall(request).execute();
