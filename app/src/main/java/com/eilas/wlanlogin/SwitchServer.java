@@ -65,7 +65,7 @@ public class SwitchServer {
                         .build());
                 requestBuilder.url("http://10.11.2.3/a70.htm");
                 break;
-            case "NJFU-WIFI":
+            case "NJFU-WiFi":
                 requestBuilder.post(new FormBody.Builder()
                         .add("DDDDD", infoHashMap.get("account").toString())//w + 学号 + @njxy
                         .add("upass", infoHashMap.get("pwd").toString())//pwd
