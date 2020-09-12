@@ -49,43 +49,31 @@ public class SwitchServer {
 
     public Request constructRequest() {
         HashMap<?, ?> infoHashMap = MainActivity.getInfoHashMap();
-        Request.Builder requestBuilder = new Request.Builder();
 
-        Log.i("ssid", getWifiSSID());
+        Request.Builder requestBuilder = new Request.Builder();
+        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+        formBodyBuilder.add("upass", infoHashMap.get("pwd").toString())
+                .add("R1", "0")
+                .add("R3", "0")
+                .add("R6", "0")
+                .add("para", "00")
+                .add("0MKKey", "123456");
         switch (getWifiSSID()) {
             case "@f-Young":
-                requestBuilder.post(new FormBody.Builder()
+                requestBuilder.post(formBodyBuilder
                         .add("DDDDD", infoHashMap.get("account").toString() + "@njxy")//w + 学号 + @njxy
-                        .add("upass", infoHashMap.get("pwd").toString())//pwd
-                        .add("R1", "0")
-                        .add("R3", "0")
-                        .add("R6", "0")
-                        .add("para", "00")
-                        .add("0MKKey", "123456")
                         .build());
                 requestBuilder.url("http://10.11.2.3/a70.htm");
                 break;
             case "NJFU-WiFi":
-                requestBuilder.post(new FormBody.Builder()
-                        .add("DDDDD", infoHashMap.get("account").toString())//w + 学号 + @njxy
-                        .add("upass", infoHashMap.get("pwd").toString())//pwd
-                        .add("R1", "0")
-                        .add("R3", "0")
-                        .add("R6", "0")
-                        .add("para", "00")
-                        .add("0MKKey", "123456")
+                requestBuilder.post(formBodyBuilder
+                        .add("DDDDD", infoHashMap.get("account").toString())//w + 学号
                         .build());
                 requestBuilder.url("http://121.248.150.37/a70.htm");
                 break;
             case "CMCC-EDU":
-                requestBuilder.post(new FormBody.Builder()
-                        .add("DDDDD", infoHashMap.get("account").toString() + "@cmcc")//w + 学号 + @njxy
-                        .add("upass", infoHashMap.get("pwd").toString())//pwd
-                        .add("R1", "0")
-                        .add("R3", "0")
-                        .add("R6", "0")
-                        .add("para", "00")
-                        .add("0MKKey", "123456")
+                requestBuilder.post(formBodyBuilder
+                        .add("DDDDD", infoHashMap.get("account").toString() + "@cmcc")//w + 学号 + @cmcc
                         .build());
                 requestBuilder.url("http://10.11.1.3/a70.htm");
                 break;
